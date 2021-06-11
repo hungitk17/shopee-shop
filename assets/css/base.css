@@ -140,9 +140,14 @@ input {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.btn.btn-primary {
+.btn.btn-primary-shop {
     background-color: var(--primary-color);
     color: var(--white-color);
+}
+
+.btn.btn-primary {
+    background-color: rgb(22, 106, 233);
+    color: var(--white-color) !important;
 }
 
 .btn.btn--disabled {
