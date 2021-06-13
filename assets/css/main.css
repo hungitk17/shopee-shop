@@ -1471,7 +1471,7 @@ i.home-product-item__like-icon-fill {
     justify-content: center;
 }
 
-.swal-modal.swal-footer {
+.swal-modal .swal-footer {
     text-align: center !important;
 }
 

@@ -47,28 +47,38 @@ function handleSubmit() {
     var email = $('#exampleInputEmail1').val() || "";
     var phoneNumber = $('#exampleInputPhone1').val() || "";
     var address = $('#exampleInputAddress1').val() || "";
-    var params = {
-        name,
-        email,
-        phoneNumber: `${phoneNumber}`,
-        address,
+    if(name === "" || email === "" || phoneNumber === "" || address === "")
+    {
+        swal({
+            title: "Thông báo",
+            text: "Thông tin thanh toán không được để trống!",
+            icon: "warning",
+            button: "Ok",
+        })
+    }else{
+        var params = {
+            name,
+            email,
+            phoneNumber: `${phoneNumber}`,
+            address,
+        }
+        postData(`${link_server}/bill/create`, params).then(function (response) {
+            console.log("res data", response.data)
+            swal({
+                title: "Thông báo",
+                text: "Đơn hàng của bàn đã được thanh toán thành công!",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                hidePopupPayment();
+            });
+        }).catch(function (error) {
+            swal({
+                title: "Thông báo",
+                text: "Thanh toán thất bại!",
+                icon: "error",
+                button: "Ok",
+            });
+        });
     }
-    postData(`${link_server}/bill/create`, params).then(function (response) {
-        console.log("res data", response.data)
-        swal({
-            title: "Thông báo",
-            text: "Đơn hàng của bàn đã được thanh toán thành công!",
-            icon: "success",
-            button: "Ok",
-        }).then(() => {
-            hidePopupPayment();
-        });
-    }).catch(function (error) {
-        swal({
-            title: "Thông báo",
-            text: "Thanh toán thất bại!",
-            icon: "error",
-            button: "Ok",
-        });
-    });
 }
